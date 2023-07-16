@@ -60,12 +60,19 @@ int mains()
     // build and compile our shader program
     // ------------------------------------
     // vertex shader
+    /*
+    GL_VERTEX_SHADER：用于创建顶点着色器。
+    GL_FRAGMENT_SHADER：用于创建片段着色器
+    */
     unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    // 函数将着色器代码加载到着色器对象中
     glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
+    // 编译着色器代码
     glCompileShader(vertexShader);
     // check for shader compile errors
     int success;
     char infoLog[512];
+    // glGetShaderiv:用于查询一个着色器对象的信息，它允许你获取着色器对象的参数和属性信息。
     glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
     if (!success)
     {
@@ -106,22 +113,39 @@ int mains()
     }; 
 
     unsigned int VBO, VAO;
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
+    /*
+        1: 请求生成的顶点数组对象数量。在这里，我们请求生成一个顶点数组对象。
+        &VAO: 存储生成的顶点数组对象标识符的变量地址。它是一个指向 VAO 变量的指针。
+    */
+    glGenVertexArrays(1, &VAO); // 生成一个顶点数组对象
+    glGenBuffers(1, &VBO); //创建一个顶点缓冲对象，并将其标识符保存在 VBO 变量中。
     // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
-    glBindVertexArray(VAO);
-
+    //绑定（激活）刚刚创建的顶点数组对象 VAO，使后续操作针对该对象进行。
+    glBindVertexArray(VAO); 
+    //绑定（激活）刚刚创建的顶点缓冲对象 VBO，将后续的缓冲操作指向该缓冲对象。
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    /*
+        将顶点数据（vertices 数组）上传到之前绑定的顶点缓冲对象 VBO 中。
+        这个函数将顶点数据从CPU（主机内存）复制到GPU（显存）中的顶点缓冲对象，这样在渲染时，OpenGL就可以直接从GPU中访问这些数据，从而提高渲染性能。
+        GL_STATIC_DRAW: 表示数据使用的预期用途，也是一个OpenGL枚举常量。同时也表示数据不会频繁变动，适用于静态场景中的顶点数据。
+    */
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
+    /*
+    设置顶点属性指针。这里设置属性索引为 0（通常用于顶点位置数据），每个顶点有 3 
+    个浮点数（x、y、z 坐标），数据类型为浮点数（GL_FLOAT），不进行归一化处理
+    （GL_FALSE），步长为 3 个浮点数（3 * sizeof(float)），且顶点数据起始位置为 0。
+    */
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    // 启用顶点属性数组。激活索引为 0 的顶点属性，使其可以在着色器中访问。
     glEnableVertexAttribArray(0);
 
     // note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
+   //解绑顶点缓冲对象。将目标缓冲区（GL_ARRAY_BUFFER）绑定为0，表示取消绑定。
     glBindBuffer(GL_ARRAY_BUFFER, 0); 
 
     // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
     // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
+   
     glBindVertexArray(0); 
 
 
