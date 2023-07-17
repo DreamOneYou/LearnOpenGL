@@ -9,7 +9,7 @@ Contains code samples for all chapters of Learn OpenGL and [https://learnopengl.
     5、之后你可以选择指定的项目设置为启动项，然后右击生成，之后就可以点击本地windows调试器了。
     
 建议使用cmake，从源代码构建库。
-
+## [学习笔记](https://github.com/DreamOneYou/LearnOpenGL/blob/master/learnNoteBook.md)
 ## Linux building
 First make sure you have CMake, Git, and GCC by typing as root (sudo) `apt-get install g++ cmake git` and then get the required packages:
 Using root (sudo) and type `apt-get install libsoil-dev libglm-dev libassimp-dev libglew-dev libglfw3-dev libxinerama-dev libxcursor-dev  libxi-dev libfreetype-dev libgl1-mesa-dev xorg-dev` .
