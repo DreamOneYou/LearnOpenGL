@@ -1,10 +1,13 @@
 # learnopengl.com code repository
 Contains code samples for all chapters of Learn OpenGL and [https://learnopengl.com](https://learnopengl.com). 
 
-## Windows building
-All relevant libraries are found in /libs and all DLLs found in /dlls (pre-)compiled for Windows. 
-The CMake script knows where to find the libraries so just run CMake script and generate project of choice.
-
+## 如何在window编译成visual studio可执行文件
+    1、首先克隆代码到本地
+    2、在下载的文件里创建一个/build文件夹
+    3、使用cmake进行编译。需要设置一个选项在编译的时候：CMAKE_CONFIGURATION_TYPES:Debug;Release
+    4、之后可以Configure，我选择的是vs2017，x64。之后在Generate，之后可以Open Project。
+    5、之后你可以选择指定的项目设置为启动项，然后右击生成，之后就可以点击本地windows调试器了。
+    
 Keep in mind the supplied libraries were generated with a specific compiler version which may or may not work on your system (generating a large batch of link errors). In that case it's advised to build the libraries yourself from the source.
 
 ## Linux building
@@ -39,9 +42,4 @@ Polytonic created a project called [Glitter](https://github.com/Polytonic/Glitte
 Everything you need to run a single LearnOpenGL Project (including all libraries) and just that; nothing more. 
 Perfect if you want to follow along with the chapters, without the hassle of having to manually compile and link all third party libraries!
 
-## 如何编译成visual studio可执行文件
-    1、首先克隆代码到本地
-    2、在下载的文件里创建一个/build文件夹
-    3、使用cmake进行编译。需要设置一个选项在编译的时候：CMAKE_CONFIGURATION_TYPES:Debug;Release
-    4、之后可以Configure，我选择的是vs2017，x64。之后在Generate，之后可以Open Project。
-    5、之后你可以选择指定的项目设置为启动项，然后右击生成，之后就可以点击本地windows调试器了。
+
