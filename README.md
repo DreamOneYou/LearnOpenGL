@@ -8,7 +8,7 @@ Contains code samples for all chapters of Learn OpenGL and [https://learnopengl.
     4、之后可以Configure，我选择的是vs2017，x64。之后在Generate，之后可以Open Project。
     5、之后你可以选择指定的项目设置为启动项，然后右击生成，之后就可以点击本地windows调试器了。
     
-Keep in mind the supplied libraries were generated with a specific compiler version which may or may not work on your system (generating a large batch of link errors). In that case it's advised to build the libraries yourself from the source.
+建议使用cmake，从源代码构建库。
 
 ## Linux building
 First make sure you have CMake, Git, and GCC by typing as root (sudo) `apt-get install g++ cmake git` and then get the required packages:
